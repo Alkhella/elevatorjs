@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "info": [
+    {
+      "name": "Elevator",
+      "version": "^1.0.0"
+    }
+  ],
+
+  "dependencies": {
+    "__init": "^1.0.0",
+    "engine": "^1.0.0"
+  },
+
+  "authorname": {
+    "company": "edussm Inc",
+    "developer": "Rezwan Ahmod Sami",
+    "email": "samiahmedahmed0f0@gmail.com"
+  }
+   
+}
