@@ -12,6 +12,9 @@ export class __init{
         component.innerHTML = content;
     }
 
+    __render_DOM_head(content){
+        document.querySelector("head").innerHTML = content;
+    }
 
     __parse_object_to_param(parsed_qs){
          let data = '';
@@ -82,7 +85,7 @@ export class __init{
             }
 
             if (http_url_change != false) {
-                if (http_url != '') {
+                if (http_url != undefined) {
                     window.history.pushState(server_host, '', http_url);
                 }
             }
