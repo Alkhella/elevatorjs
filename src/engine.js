@@ -167,6 +167,34 @@ class Elevator_engine extends  __init{
       }
    }
 
+   __render_header(){
+         let current_http_url = window.location.href;
+         let split_url = current_http_url.split('/');
+         let last_index = (split_url.length - 1);
+         let route_path  = split_url[last_index];
+         let get_route_param = route_path.split("?");
+         let data = '';
+         if (get_route_param[1] != undefined) {
+            data = this.parse_query_string(get_route_param[1]);
+         }
+
+         let parse_data = this.__parse_object_to_param(data);
+         let headers = this.construct_headers;
+         
+
+         this.construct_headers.forEach(route => {
+
+            if (route.http_url == get_route_param[0]) {
+               if (route.method == 'GET') {
+                  let content_path = route.content_url;
+                  let route_split = content_path.split('?');
+                  route.content_url = `${route_split[0]}?`+parse_data;
+               }
+               this.route(route);
+            }
+         });
+   }
+
    __render_body(){
          let current_http_url = window.location.href;
          let split_url = current_http_url.split('/');
@@ -180,30 +208,6 @@ class Elevator_engine extends  __init{
 
          let parse_data = this.__parse_object_to_param(data);
          this.construct_routes.forEach(route => {
-            if (route.http_url == get_route_param[0]) {
-               if (route.method == 'GET') {
-                  let content_path = route.content_url;
-                  let route_split = content_path.split('?');
-                  route.content_url = `${route_split[0]}?`+parse_data;
-               }
-               this.route(route);
-            }
-         });
-   }
-
-   __render_header(){
-         let current_http_url = window.location.href;
-         let split_url = current_http_url.split('/');
-         let last_index = (split_url.length - 1);
-         let route_path  = split_url[last_index];
-         let get_route_param = route_path.split("?");
-         let data = '';
-         if (get_route_param[1] != undefined) {
-            data = this.parse_query_string(get_route_param[1]);
-         }
-
-         let parse_data = this.__parse_object_to_param(data);
-         this.construct_headers.forEach(route => {
             if (route.http_url == get_route_param[0]) {
                if (route.method == 'GET') {
                   let content_path = route.content_url;

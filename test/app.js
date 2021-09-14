@@ -30,7 +30,7 @@ elevator.http_routes([
          preloader: 'loading...',
          error_handler: 'error',
          http_url_change: false,
-         http_url: "about"
+         http_url: "about.html"
       },
       {
          method: "GET",
@@ -39,13 +39,13 @@ elevator.http_routes([
          preloader: 'loading...',
          error_handler: 'error',
          http_url_change: false,
-         http_url: "privacy"
+         http_url: "privacy.html"
       }
 ]);
 
 // set  pages headers
 elevator.page_headers_content([
-   {
+      {
          method: "GET",
          content_url: "content/header.php",
          component: "#header_load",
@@ -53,12 +53,21 @@ elevator.page_headers_content([
          error_handler: 'error',
          http_url_change: false,
          http_url: "index.html"
+      },
+      {
+         method: "GET",
+         content_url: "content/header2.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.html"
       }
 ]);
 
 // set footers
 elevator.page_footers_content([
-   {
+      {
          method: "GET",
          content_url: "content/footer.php",
          component: "#footer_load",
@@ -66,6 +75,15 @@ elevator.page_footers_content([
          error_handler: 'error',
          http_url_change: false,
          http_url: "index.html"
+      },
+      {
+         method: "GET",
+         content_url: "content/header2.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.html"
       }
 ]);
 
@@ -98,7 +116,7 @@ about_btn.addEventListener('click', ()=>{
          preloader: 'loading...',
          error_handler: 'error',
          http_url_change: true,
-         http_url: "about"
+         http_url: "about.html"
       });
 });
 
@@ -110,7 +128,7 @@ privacy_btn.addEventListener('click', ()=>{
          preloader: 'loading...',
          error_handler: 'error',
          http_url_change: true,
-         http_url: "privacy"
+         http_url: "privacy.html"
       });
 });
 
