@@ -70,6 +70,7 @@ export class __init{
             return query_string;
       }
 
+
     __init_elevator(method, content_url, component, preloader = '', error_handler = '', data = '',http_url_change = false, server_host = '', http_url = ''){
         let xhr = new XMLHttpRequest();
         let component_div = document.querySelector(component);
@@ -124,11 +125,4 @@ export class __init{
         
     }
 
-
-      
-    
-
-    __render(root){
-        document.getElementById(root);
-    }
 }

@@ -1,1 +1,1 @@
-<h1>THis is shoumik privacy</h1>
+<h1 style="color: red;">THis is shoumik privacy</h1>
