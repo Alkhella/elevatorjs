@@ -8,6 +8,7 @@ class Elevator_engine extends  __init{
       this.__init_error = [];
 
       this.server_host;
+      this.meta_content_url;
       this.preloader;
       this.error_head = '<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ERROR</title><link rel="stylesheet" href="src/css/main.css"></link>';
 
@@ -34,6 +35,7 @@ class Elevator_engine extends  __init{
       let data = arr.data;
       let http_url_change = arr.http_url_change;
       let http_url = arr.http_url;
+      let meta_loader = arr.meta_loader;
       let get_route_param = '';
 
       if (http_url != undefined) {
@@ -47,6 +49,9 @@ class Elevator_engine extends  __init{
          data = this.parse_query_string(get_route_param[1]);
          content_url = content_url+'?'+this.__parse_object_to_param(data);
       }
+      if (meta_loader == true) {
+         this.meta_loader(http_url);
+      }
 
       if (http_url_change != undefined && http_url_change == false) {
          this.__init_elevator(method, content_url, component, preloader,error_handler,data);
@@ -54,8 +59,9 @@ class Elevator_engine extends  __init{
 
          if (this.server_host != undefined && this.server_host != '') {
             if (http_url != undefined) {
-
+               
                this.__init_elevator(method, content_url, component, preloader,error_handler,data, http_url_change, this.server_host, http_url);
+               
             }else{
                this.__render_DOM_head(this.error_head);
                this.__render_DOM_root(this.__404_url);
@@ -108,6 +114,7 @@ class Elevator_engine extends  __init{
                   let route_split = content_path.split('?');
                   route.content_url = `${route_split[0]}?`+parse_data;
                }
+               console.log(route.meta_loader);
                this.route(route);
             }
          });
@@ -168,6 +175,36 @@ class Elevator_engine extends  __init{
          
          this.construct_footers[routes_keys[i]] = routes_values[i];
          
+      }
+   }
+
+   meta_loader(route_url){
+      if (this.meta_content_url != undefined && this.meta_content_url != '') {
+         let current_http_url = window.location.href;
+         let split_url = current_http_url.split('/');
+         let last_index = (split_url.length - 1);
+         let route_path  = split_url[last_index];
+         let get_route_param = route_path.split("?");
+         let route = '';
+         if (route_url == undefined) {
+            route = get_route_param[0];
+         }else{
+            route = route_url;
+         }
+
+         console.log(route);
+
+         let method = 'POST';
+         let content_url = this.meta_content_url;
+         let component = 'head meta';
+         let preloader = '';
+         let error_handler = '';
+         let data = {route: route};
+
+         this.__init_elevator(method, content_url, component, preloader,error_handler,data);
+
+      }else{
+         this.__render_DOM_root("define meta content");
       }
    }
 
@@ -250,8 +287,9 @@ class Elevator_engine extends  __init{
 
    __render(){
          this.__render_header();
+         this.meta_loader();
          this.__render_body();
-         this.__render_footers();   
+         this.__render_footers();  
     }
 
 }
