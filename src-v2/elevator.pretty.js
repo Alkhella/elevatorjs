@@ -4196,12 +4196,14 @@ class __init {
         return query_string;
     }
 
-    __init_elevator(method, content_url, component, preloader='', error_handler='', data='', http_url_change=false, server_host='', http_url='') {
+    __init_elevator(method, content_url, component, preloader='', error_handler='', data='',type, http_url_change=false, server_host='', http_url='') {
         let component_div = document.querySelector(component);
 
         if (http_url_change != false) {
             if (http_url != undefined) {
-                window.history.pushState(server_host, '', http_url);
+                if (type == 'route') {
+                    window.history.pushState(server_host, '', http_url);
+                }
             }
         }
 
@@ -4264,6 +4266,10 @@ class Elevator_engine extends __init {
         let http_url = arr.http_url;
         let meta_loader = arr.meta_loader;
         let get_route_param = '';
+        let type = 'route';
+        if (arr.type != undefined) {
+            type  = arr.type;
+        }
 
         if (http_url != undefined) {
             get_route_param = http_url.split("?");
@@ -4281,13 +4287,12 @@ class Elevator_engine extends __init {
         }
 
         if (http_url_change != undefined && http_url_change == false) {
-            this.__init_elevator(method, content_url, component, preloader, error_handler, data);
+            this.__init_elevator(method, content_url, component, preloader, error_handler, data, type);
         } else if (http_url_change == true) {
 
             if (this.server_host != undefined && this.server_host != '') {
                 if (http_url != undefined) {
-
-                    this.__init_elevator(method, content_url, component, preloader, error_handler, data, http_url_change, this.server_host, http_url);
+                    this.__init_elevator(method, content_url, component, preloader, error_handler, data,type, http_url_change, this.server_host, http_url);
 
                 } else {
                     this.__render_DOM_head(this.error_head);
@@ -4297,8 +4302,6 @@ class Elevator_engine extends __init {
                 this.__render_DOM_head(this.error_head);
                 this.__render_DOM_root(this.__404_server_host);
             }
-        } else {
-            this.__init_elevator(method, content_url, component, preloader, error_handler, data);
         }
 
     }
@@ -4335,6 +4338,7 @@ class Elevator_engine extends __init {
             }
 
             let parse_data = this.__parse_object_to_param(data);
+            
             this.construct_routes.forEach(route=>{
                 if (route.http_url == get_route_param[0]) {
                     if (route.method == 'GET') {
@@ -4346,14 +4350,13 @@ class Elevator_engine extends __init {
                     this.route(route);
                     this.__render_footers();
                 }
-            }
-            );
+            });
         }
 
     }
 
     pop_route() {
-        history.back()
+        history.back();
         window.addEventListener('popstate', (event)=>{
             this.__history_routes_handler(true);
         });
@@ -4369,7 +4372,7 @@ class Elevator_engine extends __init {
     header_load(arr) {
         arr.method = 'GET';
         arr.http_url_change = false;
-
+        arr.type  = "header"
             let route_http_url = arr.http_url;
             let split_url = route_http_url.split('/');
             let last_index = (split_url.length - 1);
@@ -4387,8 +4390,8 @@ class Elevator_engine extends __init {
         arr.method = 'GET';
         arr.data = '';
         arr.http_url_change = false;
-        arr.http_url = '';
-        
+        arr.type  = "footer"
+
         let route_http_url = arr.http_url;
             let split_url = route_http_url.split('/');
             let last_index = (split_url.length - 1);
@@ -4441,11 +4444,12 @@ class Elevator_engine extends __init {
             let component = 'head meta';
             let preloader = '';
             let error_handler = '';
+            let type  = 'meta'
             let data = {
                 route: route
             };
 
-            this.__init_elevator(method, content_url, component, preloader, error_handler, data);
+            this.__init_elevator(method, content_url, component, preloader, error_handler, data, type);
 
         } else {
             this.__render_DOM_root("define meta content");
