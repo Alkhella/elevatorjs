@@ -8,8 +8,11 @@ let next = document.getElementById("next");
 // defining server host
 elevator.server_host = 'http://localhost/Elevator/elevator-v2/test/';
 
-elevator.error_404 = '404 error';
+// define error pages
+// elevator.error_404 = '404 error';
 
+
+// define meta contents
 elevator.meta_content_url = 'inc/meta-content.php';
 
 // http routes setup
@@ -68,7 +71,7 @@ elevator.page_headers_content([
       },
       {
          method: "GET",
-         content_url: "content/header.php",
+         content_url: "content/header2.php",
          component: "#header_load",
          preloader: 'loading...',
          error_handler: 'error',
