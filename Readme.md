@@ -30,19 +30,35 @@ npm install Example:
 ``` bash
 npm i @alkhella.inc/elevatorjs
 ```
+OR
+by copy script tag:
+``` html
+<script src="../src/elevator.js"></script>
+```
 
-`.gitignore` and `.Rbuildignore` are hidden files, and specify which
-files should be ignored by Git (Vuorre and Curley 2018), and R package
-building operations, respectively. You can ignore them for now.
-`DESCRIPTION` is a file describing the package, and `NAMESPACE` its
-functions. `R/` is the folder for scripts that contain R functions.
-`exampleRPackage.Rproj` identifies the folder as an R package project.
-`man/` is the “manuals” folder which will have files documenting the
-package’s functions.
+Then Linked the elevator.js file in your projects html ``` <head> ``` Tag
 
-The package is already functional, but it contains nothing useful: Next,
-we introduce and edit the content to create a complete package that
-contains data and functions.
+Example linking:
+
+``` html
+<head>
+   <script src="../src/elevator.js"></script>
+</head>
+```
+
+If you are using ```npm i @alkhella.inc/elevatorjs``` then go to the folder: ```node_modules/@alkhella.inc/ ```  there you will see ```/elevatorjs ``` folder. Just copy the ```/elevatorjs ``` folder and use it in your ```/assets``` folder and then link into html ```<head>``` tag.
+
+OR
+use it directly like:
+```html
+<script src="./node_modules/@alkhella.inc/elevatorjs/src/elevator.js"></script>
+```
+
+But best method is copy the ```/elevatorjs``` folder and paste it in assets folder and use it like:
+```html
+<script src="./assets/elevatorjs/src/elevator.js"></script>
+```
+
 
 ## Describe the package
 
