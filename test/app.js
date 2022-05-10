@@ -59,12 +59,21 @@ elevator.page_headers_content([
       },
       {
          method: "GET",
-         content_url: "content/header2.php",
+         content_url: "content/header.php",
          component: "#header_load",
          preloader: 'loading...',
          error_handler: 'error',
          http_url_change: false,
          http_url: "about.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/header.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
       }
 ]);
 
@@ -81,12 +90,21 @@ elevator.page_footers_content([
       },
       {
          method: "GET",
-         content_url: "content/header2.php",
+         content_url: "content/footer.php",
          component: "#footer_load",
          preloader: 'loading...',
          error_handler: 'error',
          http_url_change: false,
          http_url: "about.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/footer.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
       }
 ]);
 
@@ -138,23 +156,6 @@ privacy_btn.addEventListener('click', ()=>{
          http_url: "privacy.php"
       });
 });
-
-
-// loading header
-//   elevator.header_load({
-//          content_url: "content/header.php",
-//          component: "#header_load",
-//          preloader: 'loading...',
-//          error_handler: 'error',
-//   });
-
-// loading footer
-//    elevator.footer_load({
-//          content_url: "content/footer.php",
-//          component: "#footer_load",
-//          preloader: 'loading...',
-//          error_handler: 'error',
-//   });
 
 
 // rendering

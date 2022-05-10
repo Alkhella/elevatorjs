@@ -4279,6 +4279,24 @@ class Elevator_engine extends __init {
 
     }
 
+    /*
+        in route() method
+        @param arr will take object as parameter.
+
+        Example:
+
+        elevator.route({
+            method: GET, // This is method of request, two method is accepted (POST/GET).
+            meta_loader: true, // You need to define boolean(true/false) here to change the meta content on per link visits,
+            content_url: "content/about.php", // there you need to give path of content_url, from where your contet will load in every route.
+            component: "#root", // This is the component address, it will define by class or id in html where content will display.
+            preloader: 'loading...', // This is preloader, there you can insert your preloader html content.
+            data: {id: 2456}, // There you can pass data as javascript object
+            error_handler: '<h2>error<h2>', // There you can put error content in html.
+            http_url_change: true, // there you need to define boolean(true/false) value to declare that http url should change or not in browser.
+            http_url: "about.php" // This is http url, it will visible in browser url tab.
+        })
+    */
     route(arr) {
         let method = arr.method;
         let content_url = arr.content_url;
@@ -4379,6 +4397,7 @@ class Elevator_engine extends __init {
 
     }
 
+    // This is pop route to go back url
     pop_route() {
         history.back();
         window.addEventListener('popstate', (event)=>{
@@ -4386,6 +4405,7 @@ class Elevator_engine extends __init {
         });
     }
 
+    // This is push route to go next url already you visited.
     push_route() {
         history.go(1);
         window.addEventListener('popstate', (event)=>{
