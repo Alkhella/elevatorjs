@@ -49,7 +49,7 @@ project_root
 
 ## video tutorial:
 Check this full guided video tutorial:
-[Video tutorial of elevator.js](https://youtu.be/YiZWAuHS3QM)
+[Video tutorial of elevator.js](https://youtu.be/6qcofOEAFRk)
 
 ## Installation guide
 
