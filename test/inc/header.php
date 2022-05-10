@@ -4,7 +4,7 @@
    <meta>
       
    </meta>
-   <script src="../src/elevator.pretty.js"></script>
+   <script src="../src/elevator.js"></script>
    
 </head>
 <body>
