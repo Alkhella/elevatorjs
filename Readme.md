@@ -1,5 +1,5 @@
 
-# Elevator.js
+# Elevator.js ```v1.0.1```
 
 Elevator.js is a javascript library to develop php single page/without reload web application more easily. you don't need to use node js environment and import package etc. To use that just you need to link by <script> tag in your project.
 Check the documentation for understand. You can use this library in completely free.
@@ -62,7 +62,7 @@ npm i @alkhella.inc/elevatorjs
 OR
 by copy script tag:
 ``` html
-<script src="../src/elevator.js"></script>
+<script src="https://cdn.alkhella.com/elevatorjs/src/elevator.js"></script>
 ```
 
 Then Linked the elevator.js file in your projects html ``` <head> ``` Tag
@@ -71,7 +71,7 @@ Example linking:
 
 ``` html
 <head>
-   <script src="../src/elevator.js"></script>
+   <script src="https://cdn.alkhella.com/elevatorjs/src/elevator.js"></script>
 </head>
 ```
 
@@ -513,7 +513,7 @@ elevator.__render();
 ![Rezwan Ahmod Sami](https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/277165262_3131060227148128_3760611883011220703_n.jpg?_nc_cat=103&ccb=1-6&_nc_sid=19026a&_nc_eui2=AeFQqPH7wmu5cB65urI2c5dCc757f2tOD-tzvnt_a04P65eQicMg1K12Dh0Y2VbQox-5-1q-YU_Up8XfJ7s6VLPB&_nc_ohc=y3t2Zy9e7K4AX_Bd5Z8&_nc_ht=scontent.fdac24-2.fna&oh=00_AT-EW8skhXueCcoHLfDKCEGSmWmsmheMzF023kDhfZWPpA&oe=62800FC8)
 
 **Name:** Rezwan Ahmod Sami.(Chairman & CEO of alkhella)\
-**Profession:** Software Enginner, Entrepreneur.\
+**Profession:** Software Engineer, Entrepreneur.\
 **Lives In:** Bangladesh.\
 **Socials:**
 - [Facebook](https://facebook.com/rezwanahmodsami)

@@ -4,7 +4,7 @@
    <meta>
       
    </meta>
-   <script src="../src/elevator.js"></script>
+   <script src="https://cdn.alkhella.com/elevatorjs/src/elevator.js"></script>
    
 </head>
 <body>
