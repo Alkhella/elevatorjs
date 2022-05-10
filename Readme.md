@@ -58,6 +58,34 @@ But best method is copy the ```/elevatorjs``` folder and paste it in assets fold
 ```html
 <script src="./assets/elevatorjs/src/elevator.js"></script>
 ```
+Then create a file by name ```app.js``` in ```root``` folder.
+Example:
+``` bash
+project_root/app.js
+```
+
+Then link the ```/app.js``` file in footer of  your project html file.
+
+Example Code of ```/index.html``` :
+```html
+    <script src="app.js"></script>
+   </body>
+</html>
+```
+OR
+You can link as you want.
+
+##
+### app.js file setup example:
+```app.js``` File code example as our demo test project: (you can find in ```/test``` folder)
+
+First of all you need to define ```Server Host```. It can be your full url Example: ```https://example.com/``` OR ```https://localhost/``` for your localhost.
+
+Example:
+``` javascript
+// defining server host
+elevator.server_host = 'http://example.com/';
+```
 
 
 ## Describe the package
