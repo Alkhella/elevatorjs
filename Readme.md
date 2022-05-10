@@ -40,6 +40,7 @@ project_root
 |-- include
 |      |-- header.php
 |      |-- footer.php
+|      |-- meta-content.php
 |
 |-- index.php
 |-- about.php
