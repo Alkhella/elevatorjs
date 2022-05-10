@@ -20,6 +20,35 @@ ___
 And also it's easy to use. You can use directly to your php project. To use that script you can directly add our cdn link in your html <head> tag or also you can add by downloading elevator.js. 
 Follow the guideline to use elevator js.
 
+## Project setup ```file/folder``` stuctures:
+set files and folder like this to use ```elevator.js```:
+```bash
+project_root
+|
+|-- assets
+|      |-- elevatorjs
+|             |-- src
+|                  |-- elevator.js
+|-- components
+|      |-- header-layout
+|      |         |--- header-component.php
+|      |-- footer-layout
+|      |         |-- footer-component.php
+|      |-- about-component.php
+|      |-- Index-component.php
+|      
+|-- include
+|      |-- header.php
+|      |-- footer.php
+|
+|-- index.php
+|-- about.php
+|-- app.js
+```
+
+## video tutorial:
+Check this full guided video tutorial:
+[Video tutorial of elevator.js](https://youtu.be/YiZWAuHS3QM)
 
 ## Installation guide
 
@@ -79,556 +108,420 @@ You can link as you want.
 ### app.js file setup example:
 ```app.js``` File code example as our demo test project: (you can find in ```/test``` folder)
 
-First of all you need to define ```Server Host```. It can be your full url Example: ```https://example.com/``` OR ```https://localhost/``` for your localhost.
+First of all you need to set ```Server Host```. It can be your full url Example: ```https://example.com/``` OR ```https://localhost/``` for your localhost.
 
 Example:
 ``` javascript
-// defining server host
+// set server host
 elevator.server_host = 'http://example.com/';
 ```
+Then set a ```meta content url``` to get meta content, mainly we used php for dynamic meta content. Check the ```/test/app.js``` file in this project dir.
 
-
-## Describe the package
-
-The `DESCRIPTION` file describes the package in a standard,
-machine-readable format. This file is automatically created with example
-content by R Studio. However, you need to edit the file to reflect the
-details of your package, making sure you don’t change the formatting:
-This file is read by the R package creating process, and the file must
-therefore remain machine-readable. Here’s an example:
-
-``` bash
-Package: exampleRPackage
-Type: Package
-Title: An example R package
-Version: 0.1.0
-Authors@R: person("Matti", "Vuorre", email = "mv2521@columbia.edu",
-                  role = c("aut", "cre"))
-Description: This package is an example R package.
-Encoding: UTF-8
-LazyData: true
-Depends: 
-    R (>= 3.1)
-Imports:
-    stringr
+Example:
+```javascript
+// set meta content
+elevator.meta_content_url = 'inc/meta-content.php';
 ```
 
-This file serves two important purposes. First, it describes your
-package (`Title`, `Version` number, `Authors`, and `Description`). The
-`Authors@R` field contains person information in R syntax (see
-`?person`), and can include multiple persons by wrapping them in `c()`.
-(`Encoding` and `Lazydata` field can be ignored, for our purposes.)
-Second, it specifies your package’s dependencies (`Depends`, `Imports`,
-and `Suggests` \[the latter is not included in this example\]).
+Then you must need to set ```http routes```. ```Http Routes``` is actually the urls, which urls user will visit. 
+You need to pass array objects with all the routes.
 
-There are important differences between the three fields for specifying
-your package’s dependencies. First, you should rarely, if ever, use
-`Depends`, except for specifying a version of R that your package
-requires. `Imports` is the most common field for listing the R packages
-that your package requires: Packages listed in `Imports` are installed
-when your package is installed. When you write functions (see below) in
-your package, you can use the other package’s functions with the `::`
-operator (e.g. `stringr::to_title_case()`).
-
-For more information about DESCRIPTION, and describing your package, see
-<http://r-pkgs.had.co.nz/description.html>.
-
-### Readme
-
-Although not part of the R package standard, we recommend creating a
-readme file that gives additional narrative description about your
-package. We recommend writing the file in Markdown or R Markdown
-(Allaire et al. 2016). To create the R Markdown file, use the following
-function from the usethis package:
-
-``` r
-library(usethis)
-use_readme_rmd()
+Example: (from our test project ```/test/app.js``` file)
+``` javascript
+// http routes setup
+elevator.http_routes([
+      {
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/home.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "index.php"
+      },
+      {
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/about.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.php"
+      },
+      {
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/privacy.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
+      }
+]);
 ```
 
-This function created the file, and also printed a message indicating
-that the file has been added to the “.Rbuildignore” file. Make changes
-to `README.Rmd` with R Studio’s text editor. When you are done, click
-Knit in R Studio, which produces a Markdown file that displays nicely
-when the package is hosted online (see below). (If your README.Rmd uses
-your package, you cannot Knit it before clicking “Install and Restart”
-in R Studio’s build tab.)
+Explanation code about array data objects:
+``` javascript
 
-Now that we have described the package, let’s add some data to it.
 
-## Add data
-
-The purposes of saving data in an R package are that the resulting data
-will be easily available, and described and organized in a standard,
-machine-readable format. Further, if your package’s source code is under
-version control (Vuorre and Curley 2018), the data will be versioned as
-well.
-
-Broadly, there are 3 steps to including data in an R package: 1. Placing
-raw data in the “data-raw” directory, 2. creating an R script that
-processes the raw data and creates an R data object into the “data”
-directory, and 3. documenting the final data object.
-
-First, we will add the raw data to a `data-raw/` directory. We use a
-convenience function from the usethis package to create that folder,
-which will also add the folder into the `.Rbuildignore` file, ensuring
-that the R package build process will ignore it.
-
-``` r
-use_data_raw()
 ```
 
-Then, I moved an example data file (a small simulated dataset) to the
-“data-raw” directory, and created a
-[“preprocess.R”](https://github.com/mvuorre/exampleRPackage/blob/master/data-raw/preprocess.R)
-file in the same directory. Usually, that file would contain the code
-for pre-processing the data, but for this example that is not needed.
-That example preprocessing file simply reads in the data file, and runs
-the following command:
+in ```elevator.route()``` method
+        ```@param``` ```arr``` will take object as parameter.
 
-``` r
-use_data(exampleData)
+#### Object keys:
+```method: GET, // This is method of request, two method is accepted (POST/GET). ```
+
+```meta_loader: true, // You need to define boolean(true/false) here to change the meta content on per link visits, ```
+
+```content_url: "content/about.php", // there you need to give path of content_url, from where your contet will load in every route.```
+
+```component: "#root", // This is the component address, it will define by class or id in html where content will display.```
+
+```preloader: 'loading...', // This is preloader, there you can insert your preloader html content.```
+
+```data: {id: 2456}, // There you can pass data as javascript object```
+
+```error_handler: '<h2>error<h2>', // There you can put error content in html.```
+
+``` http_url_change: true, // there you need to define boolean(true/false) value to declare that http url should change or not in browser.```
+
+```http_url: "about.php" // This is http url, it will visible in browser url tab.```
+
+
+This objects keys also same as other's methods.
+
+#
+Then you need to set ```elevator.page_headers_content([]);``` for set per routes different headers or same header content.
+
+Example code:
+
+``` javascript
+// set  pages headers
+elevator.page_headers_content([
+      {
+         method: "GET",
+         content_url: "content/header.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "index.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/header.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/header2.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
+      }
+]);
+```
+Then you need to set ```elevator.page_footers_content([]);``` for set per routes different footers or same footer content.
+
+Example code:
+``` javascript
+elevator.page_footers_content([
+      {
+         method: "GET",
+         content_url: "content/footer.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "index.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/footer.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/footer.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
+      }
+]);
 ```
 
-The above command takes the `exampleData` object from the R environment
-(created in the
-[script](https://github.com/mvuorre/exampleRPackage/blob/master/data-raw/preprocess.R))
-and saves the R data object into `data/`. As a result, your R package
-now includes a data set called `exampleData`.
+### Pop route and push route:
+Pop route and push route example for go back and go next:
+``` javascript
+// pop
+elevator.pop_route();
 
-Finally, the resulting R data object should be documented in a standard
-format by placing a `data.R` file in the “R” directory. To document your
-data set, create a file called `data.R` in the `R` directory. Then, use
-[roxygen2](https://roxygen2.r-lib.org/) (Wickham, Danenberg, and Eugster
-2017) documentation syntax to write your data object’s documentation in
-the `R/data.R` file. It should look similar to the following for our
-`exampleData` object:
+//push
+elevator.push_route();
+```
+Note: Must need to set it in any ```event listener```.
+Example:
+``` javascript
+back.addEventListener('click', ()=>{
+   elevator.pop_route();
+});
 
-    #' @title Scores of Group A and Group B
-    #'
-    #' @description A data set with the scores of two groups.
-    #'
-    #' @format A data frame with 60 rows and 2 variables:
-    #' \describe{
-    #'   \item{group}{Participant's group, A or B.}
-    #'   \item{score}{The participant's score in hypothetical task.}
-    #' }
-    #' @source <https://www.github.com/mvuorre/exampleRPackage>
-    "exampleData"
-
-The key features of this documentation file are (from top to bottom in
-the above code listing):
-
-Each line begins with a `#'` to indicate roxygen2 syntax. First, your
-data set should have a title (`@title`). The `@description` field is an
-optional but highly recommended longer description of the data. For
-example, what were the collection procedures, who were the respondents,
-etc. The `@format` field describes the object (e.g. an R data.frame),
-its dimensions, and then describes all the variables (e.g. `group` and
-`score`). The `@source` field includes the source of the data, which
-could be a citation to an academic article, or a website, for example.
-Finally, the last line should be the name of the data object in
-quotation marks. You can document multiple data files in the same
-`R/data.R` file; simply leave one blank line between them.
-
-For more details on creating, documenting, and including data sets in R
-packages, see <http://r-pkgs.had.co.nz/data.html>.
-
-## Create functions
-
-Functions in R packages are portable, such that others can install the
-package from their R console, load it, and start using the functions
-immediately. Packages can also depend on other packages (and be depended
-on), such that R automatically installs any requirements for your
-functions to work appropriately. Functions within R packages are
-documented in a standardized manner, and the documentation for a
-function can be viewed in R (e.g. try `?mean`) or online.
-
-Learning and following R conventions for declaring functions has a
-pedagogical benefit to the researcher and may improve their practices.
-There is also a reuse benefit: Functions can be difficult to find in old
-scripts, but easy to find and load if they are called from an existing
-package. Thus, formally including one’s functions in R packages
-facilitates reproducibility and sharing.
-
-To include functions in your package, place the functions’ scripts in
-files in the “R” directory. When you first created your package, that
-directory was created with an example `hello.R` script. Open that file
-in R Studio’s text editor, and delete all the text above the function.
-Then, in the R Studio menu, click “Code” -\> “Insert Roxygen Skeleton”.
-That creates template documentation into the function’s file, which you
-can then manually fill to describe your function. `exampleRPackage`
-includes an example function, whose source looks like this:
-
-    #' Personal greeting
-    #'
-    #' @description Greet a person and appropriately capitalize their name.
-    #'
-    #' @param name Your name (character string; e.g. "john doe").
-    #'
-    #' @return A character string, capitalized to title case.
-    #' @export
-    #'
-    #' @examples
-    #' hello("james bond")
-    hello <- function(name = "your name") {
-        name <- stringr::str_to_title(name)
-        print(paste("Hello,", name))
-    }
-
-This function, as was the data set above, is documented with
-[roxygen2](https://roxygen2.r-lib.org/index.html) syntax. Many of the
-fields are similar from the above section on data documentation. Here,
-we also have `@param` fields, these describe what the function’s
-arguments are. The `@return` field describes what the function will
-return. `@export` indicates that the function should be exported from
-your package; that is, made available when you attach the package with
-`library()`. There is also an `@examples` field that can include
-executable examples of how to use your function. Below the function’s
-description is the actual code.
-
-For more information on writing functions in R packages, see
-<http://r-pkgs.had.co.nz/r.html>.
-
-## Finish documentation and build package
-
-We are almost ready with the minimal example package. The only remaining
-steps are to finish documenting the package, and then to build and
-install it on your computer.
-
-Your package is now documented in the DESCRIPTION file, and the
-functions and data are documented in their respective files in the R/
-directory. The data and functions were documented with
-[roxygen2](https://roxygen2.r-lib.org/) syntax, which must subsequently
-be translated into R’s documentation files in the man/ directory, and
-their dependencies must be listed in the NAMESPACE file.
-
-Fortunately, you don’t need to do that manually. First, ensure that R
-Studio generates documentation with roxygen. Go to Tools -\> Project
-Options… -\> Build Tools, and ensure that “Generate documentation with
-roxygen” is checked, and that “Automatically run roxygen when running
-install and restart” is checked in the subsequent “Configure” menu.
-Then, delete the two files, man/hello.Rd and NAMESPACE, which R Studio
-created automatically when you started your package. Finally, in R
-Studio’s “Build” tab, click “Install and Restart”.
-
-Doing so automatically writes the documentation in man/, and the
-appropriate dependencies and your package’s exported functions into the
-NAMESPACE file, which you subsequently never need to (or should) edit
-manually. After this, whenever you have edited your documentation,
-clicking “Install and Restart” will update the documentation files. To
-read more about documenting your data and functions, please visit
-<http://r-pkgs.had.co.nz/man.html>.
-
-Having clicked “Install and Restart” you have also, rather obviously,
-installed your package and restarted R. If, following this tutorial, you
-created the `hello()` function and `exampleData` data sets, they are now
-available to you when the package is attached:
-
-``` r
-library(exampleRPackage)
-hello("my name")
-#> [1] "Hello, My Name"
-head(exampleData)
-#>   group     score
-#> 1     a  97.18260
-#> 2     a  86.87440
-#> 3     a 107.95184
-#> 4     a 102.70070
-#> 5     a  97.22694
-#> 6     a  94.33976
+next.addEventListener('click', ()=>{
+   elevator.push_route();
+});
 ```
 
-And you can view their help pages by prepending their names with a
-question mark:
+### route example with ```onclick``` event:
+``` javascript
+home_btn.addEventListener('click', ()=>{
+   elevator.route({
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/home.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: elevator.error_404,
+         http_url_change: true,
+         http_url: "index.php"
+      });
+});
 
-``` r
-?hello
-?exampleData
+about_btn.addEventListener('click', ()=>{
+   elevator.route({
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/about.php",
+         component: "#root",
+         preloader: 'loading...',
+         data: {id: 2456},
+         error_handler: 'error',
+         http_url_change: true,
+         http_url: "about.php"
+      });
+});
+
+privacy_btn.addEventListener('click', ()=>{
+   elevator.route({
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/privacy.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: true,
+         http_url: "privacy.php"
+      });
+});
 ```
 
-# Advanced (optional) steps
+## Last important:
+You must need to call a method ```elevator.__render();``` else content will not load.
+Example: 
+``` javascript
+// rendering
+elevator.__render();
 
-## Sharing the R package
-
-### GitHub
-
-The easiest way to share the package is to create the R package as a Git
-repository and share it on GitHub (Vuorre and Curley (2018);
-<https://happygitwithr.com/>; <http://r-pkgs.had.co.nz/git.html>). If
-you followed the tutorial above, Git is already initialized in the
-package’s repository. After connecting the local Git repository to
-GitHub, you can use R Studio’s Git panel to stage, commit, push, and
-pull changes. Once the package’s source code is pushed to GitHub, others
-can install the package. For example, you can install the example
-package created in this tutorial:
-
-``` r
-devtools::install_github("mvuorre/exampleRPackage")
 ```
 
-The above command, when executed in R, downloads and installs the
-`exampleRPackage` from GitHub user `mvuorre`. You can view this example
-R package’s source code on GitHub:
-<https://github.com/mvuorre/exampleRPackage>.
+### Whole ```app.js``` code example: (from ```/test``` project)
+```javascript
 
-### Open Science Framework
+let home_btn = document.getElementById("home");
+let about_btn = document.getElementById("about");
+let privacy_btn = document.getElementById("privacy");
+let back = document.getElementById("back");
+let next = document.getElementById("next");
 
-If you have connected the package’s GitHub repository to an OSF project,
-you can also install the package from OSF, as done below for this
-example package:
+// defining server host
+elevator.server_host = 'http://localhost/Elevator/elevator-v2/test/';
 
-``` r
-temporary_file <- tempfile(fileext = ".tar.gz")
-download.file("https://osf.io/mqd6f/download", destfile = temporary_file)
-install.packages(temporary_file, repos = NULL)
+// define error pages
+// elevator.error_404 = '404 error';
+
+
+// define meta contents
+elevator.meta_content_url = 'inc/meta-content.php';
+
+// http routes setup
+elevator.http_routes([
+      {
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/home.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "index.php"
+      },
+      {
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/about.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.php"
+      },
+      {
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/privacy.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
+      }
+]);
+
+// set  pages headers
+elevator.page_headers_content([
+      {
+         method: "GET",
+         content_url: "content/header.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "index.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/header.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/header2.php",
+         component: "#header_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
+      }
+]);
+
+// set footers
+elevator.page_footers_content([
+      {
+         method: "GET",
+         content_url: "content/footer.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "index.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/footer.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "about.php"
+      },
+      {
+         method: "GET",
+         content_url: "content/footer.php",
+         component: "#footer_load",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: false,
+         http_url: "privacy.php"
+      }
+]);
+
+back.addEventListener('click', ()=>{
+   elevator.pop_route();
+});
+
+next.addEventListener('click', ()=>{
+   elevator.push_route();
+});
+
+
+home_btn.addEventListener('click', ()=>{
+   elevator.route({
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/home.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: elevator.error_404,
+         http_url_change: true,
+         http_url: "index.php"
+      });
+});
+
+about_btn.addEventListener('click', ()=>{
+   elevator.route({
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/about.php",
+         component: "#root",
+         preloader: 'loading...',
+         data: {id: 2456},
+         error_handler: 'error',
+         http_url_change: true,
+         http_url: "about.php"
+      });
+});
+
+privacy_btn.addEventListener('click', ()=>{
+   elevator.route({
+         method: "GET",
+         meta_loader: true,
+         content_url: "content/privacy.php",
+         component: "#root",
+         preloader: 'loading...',
+         error_handler: 'error',
+         http_url_change: true,
+         http_url: "privacy.php"
+      });
+});
+
+
+// rendering
+elevator.__render();
+
 ```
 
-## Creating a website for the R package
-
-Once the package’s source code is hosted on GitHub, you can showcase its
-contents as a website. For example, you can view exampleRPackage’s
-website at <https://mvuorre.github.io/exampleRPackage/>. To create
-websites from your packages, you need the
-[pkgdown](https://pkgdown.r-lib.org) R package (Wickham 2017). After
-installing that package, set up the required files for the website:
-
-``` r
-use_pkgdown()
-```
-
-Then, To create the website, run:
-
-``` r
-library(pkgdown)
-build_site()
-```
-
-The website is now available at `docs/index.html`. You can open it and
-view it locally. However, you will certainly want to upload the website
-somewhere so that others can access it as well. The easiest option is to
-host it on GitHub.
-
-Here, we assume that you have created the package in a local Git
-repository and have pushed the repository to GitHub. Push all the
-current changes to GitHub, and then go to the package’s GitHub website,
-click “Settings”, and scroll down to “GitHub Pages”. There, click on the
-“Source” pull-down menu that currently says “None”, and choose the
-“master branch /docs folder”. Save the changes. After a little while,
-the page will be visible at <https://username.github.io/packagename>.
-For example, `exampleRPackage`’s website is at
-<https://mvuorre.github.io/exampleRPackage>.
-
-There are many options for customizing the website; see
-<https://pkgdown.r-lib.org>.
-
-## Other content
-
-Up to this point, our package has contained only code and data. However,
-typical research products make use of those to create narrative
-documents. R packages can contain vignettes, which show example uses of
-the package’s data and functions, and are distributed with the package.
-However, many more kinds of narrative documents can be shared along the
-R package’s source code, and included on the website, such as manuscript
-PDFs created with R Markdown.
-
-Here, we create an article that shows an example analysis of the dataset
-contained in our exampleRPackage. When completed, the document will
-render as a subpage of the package’s website (see above).
-
-``` r
-usethis::use_article("Example-Analysis")
-```
-
-Then, after editing the contents of that file, re-run `build_site()`,
-and the document will be rendered as a webpage on the package’s website.
-
-The content we just added resulted in a website, but you could also
-include PDF manuscripts whose source code is R Markdown, or many other
-kinds of documents. For details, see the
-[pkgdown](https://hadley.github.io/pkgdown/) and [R
-Markdown](https://rmarkdown.rstudio.com/) websites.
-
-# Further Reading
-
-## Online Resources
-
-  - <http://r-pkgs.had.co.nz/>: Website of Hadley Wickham’s R Packages
-    book (Wickham 2015).
-  - [Writing an R package from
-    scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/):
-    A short and good blog post on how to create minimal R packages
-  - [Writing R
-    Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html):
-    The official R documentation on writing R packages. This is the
-    complete and definitive set of instructions on how to write R
-    packages. It is almost unreadable in it’s comprehensiveness, and
-    unnecessary for small R packages.
-  - <https://happygitwithr.com/>: A guide for using Git with R and R
-    Studio
-
-## References
-
-<div id="refs" class="references">
-
-<div id="ref-allaire_rmarkdown:_2016">
-
-Allaire, J. J., Joe Cheng, Yihui Xie, Jonathan McPherson, Winston Chang,
-Jeff Allen, Hadley Wickham, and Rob Hyndman. 2016. *Rmarkdown: Dynamic
-Documents for R* (version 1.3).
-<https://cran.r-project.org/web/packages/rmarkdown/index.html>.
-
-</div>
-
-<div id="ref-gorgolewski_brain_2016">
-
-Gorgolewski, Krzysztof J., Tibor Auer, Vince D. Calhoun, R. Cameron
-Craddock, Samir Das, Eugene P. Duff, Guillaume Flandin, et al. 2016.
-“The Brain Imaging Data Structure, a Format for Organizing and
-Describing Outputs of Neuroimaging Experiments.” *Scientific Data* 3
-(June): 160044. <https://doi.org/10.1038/sdata.2016.44>.
-
-</div>
-
-<div id="ref-HardwickeDataavailabilityreusability2018">
-
-Hardwicke, Tom E., Maya B. Mathur, Kyle MacDonald, Gustav Nilsonne,
-George C. Banks, Mallory C. Kidwell, Alicia Hofelich Mohr, et al. 2018.
-“Data Availability, Reusability, and Analytic Reproducibility:
-Evaluating the Impact of a Mandatory Open Data Policy at the Journal
-Cognition.” *Royal Society Open Science* 5 (8): 180448.
-<https://doi.org/10.1098/rsos.180448>.
-
-</div>
-
-<div id="ref-HoutkoopDataSharingPsychology2018">
-
-Houtkoop, Bobby Lee, Chris Chambers, Malcolm Macleod, Dorothy V. M.
-Bishop, Thomas E. Nichols, and Eric-Jan Wagenmakers. 2018. “Data Sharing
-in Psychology: A Survey on Barriers and Preconditions.” *Advances in
-Methods and Practices in Psychological Science* 1 (1): 70–85.
-<https://doi.org/10.1177/2515245917751886>.
-
-</div>
-
-<div id="ref-KleinPracticalGuideTransparency2018">
-
-Klein, Olivier, Tom E. Hardwicke, Frederik Aust, Johannes Breuer, Henrik
-Danielsson, Alicia Hofelich Mohr, Hans Ijzerman, Gustav Nilsonne, Wolf
-Vanpaemel, and Michael C. Frank. 2018. “A Practical Guide for
-Transparency in Psychological Science.” *Collabra: Psychology* 4 (1):
-20. <https://doi.org/10.1525/collabra.158>.
-
-</div>
-
-<div id="ref-LindsaySharingDataMaterials2017">
-
-Lindsay, D. Stephen. 2017. “Sharing Data and Materials in Psychological
-Science.” *Psychological Science* 28 (6): 699–702.
-<https://doi.org/10.1177/0956797617704015>.
-
-</div>
-
-<div id="ref-MartoneDatasharingpsychology2018">
-
-Martone, Maryann E., Alexander Garcia-Castro, and Gary R. VandenBos.
-2018. “Data Sharing in Psychology.” *American Psychologist* 73 (2):
-111–25. <https://doi.org/10.1037/amp0000242>.
-
-</div>
-
-<div id="ref-morey_peer_2016">
-
-Morey, Richard D., Christopher D. Chambers, Peter J. Etchells, Christine
-R. Harris, Rink Hoekstra, Daniël Lakens, Stephan Lewandowsky, et al.
-2016. “The Peer Reviewers Openness Initiative: Incentivizing Open
-Research Practices Through Peer Review.” *Royal Society Open Science* 3
-(1): 150547. <https://doi.org/10.1098/rsos.150547>.
-
-</div>
-
-<div id="ref-nosek_promoting_2015">
-
-Nosek, Brian A., G. Alter, G. C. Banks, D. Borsboom, S. D. Bowman, S. J.
-Breckler, S. Buck, et al. 2015. “Promoting an Open Research Culture.”
-*Science* 348 (6242): 1422–5. <https://doi.org/10.1126/science.aab2374>.
-
-</div>
-
-<div id="ref-Rouderwhatwhyhow2016">
-
-Rouder, Jeffrey N. 2016. “The What, Why, and How of Born-Open Data.”
-*Behavior Research Methods* 48 (3): 1062–9.
-<https://doi.org/10.3758/s13428-015-0630-z>.
-
-</div>
-
-<div id="ref-RouderMinimizingMistakesPsychological2019">
-
-Rouder, Jeffrey N., Julia M. Haaf, and Hope K. Snyder. 2019. “Minimizing
-Mistakes in Psychological Science.” *Advances in Methods and Practices
-in Psychological Science* 2 (1): 3–11.
-<https://doi.org/10.1177/2515245918801915>.
-
-</div>
-
-<div id="ref-VanpaemelAreWeWasting2015">
-
-Vanpaemel, Wolf, Maarten Vermorgen, Leen Deriemaecker, and Gert Storms.
-2015. “Are We Wasting a Good Crisis? The Availability of Psychological
-Research Data After the Storm.” *Collabra: Psychology* 1 (1): Art. 3.
-<https://doi.org/10.1525/collabra.13>.
-
-</div>
-
-<div id="ref-VuorreCuratingResearchAssets2018">
-
-Vuorre, Matti, and James P. Curley. 2018. “Curating Research Assets: A
-Tutorial on the Git Version Control System.” *Advances in Methods and
-Practices in Psychological Science* 1 (2): 219–36.
-<https://doi.org/10.1177/2515245918754826>.
-
-</div>
-
-<div id="ref-Wichertspooravailabilitypsychological2006">
-
-Wicherts, Jelte M., Denny Borsboom, Judith Kats, and Dylan Molenaar.
-2006. “The Poor Availability of Psychological Research Data for
-Reanalysis.” *American Psychologist* 61 (7): 726–28.
-<https://doi.org/10.1037/0003-066X.61.7.726>.
-
-</div>
-
-<div id="ref-wickham_pkgdown:_2017">
-
-Wickham, Hadley. 2017. *Pkgdown: Make Static HTML Documentation for a
-Package*. <https://github.com/hadley/pkgdown>.
-
-</div>
-
-<div id="ref-WickhamPackagesOrganizeTest2015">
-
-———. 2015. *R Packages: Organize, Test, Document, and Share Your Code*.
-"O’Reilly Media, Inc.". <http://r-pkgs.had.co.nz/>.
-
-</div>
-
-<div id="ref-wickham_roxygen2:_2017">
-
-Wickham, Hadley, Peter Danenberg, and Manuel Eugster. 2017. *Roxygen2:
-In-Line Documentation for R*.
-<https://CRAN.R-project.org/package=roxygen2>.
-
-</div>
-
-<div id="ref-WilkinsonFAIRGuidingPrinciples2016">
-
-Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,
-Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.
-2016. “The FAIR Guiding Principles for Scientific Data Management and
-Stewardship.” *Scientific Data* 3 (March): 160018.
-<https://doi.org/10.1038/sdata.2016.18>.
-
-</div>
-
-</div>
+## Developer's Info:
+![Rezwan Ahmod Sami](https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/277165262_3131060227148128_3760611883011220703_n.jpg?_nc_cat=103&ccb=1-6&_nc_sid=19026a&_nc_eui2=AeFQqPH7wmu5cB65urI2c5dCc757f2tOD-tzvnt_a04P65eQicMg1K12Dh0Y2VbQox-5-1q-YU_Up8XfJ7s6VLPB&_nc_ohc=y3t2Zy9e7K4AX_Bd5Z8&_nc_ht=scontent.fdac24-2.fna&oh=00_AT-EW8skhXueCcoHLfDKCEGSmWmsmheMzF023kDhfZWPpA&oe=62800FC8)
+
+**Name:** Rezwan Ahmod Sami.(Chairman & CEO of alkhella)\
+**Profession:** Software Enginner, Entrepreneur.\
+**Lives In:** Bangladesh.\
+**Socials:**
+- [Facebook](https://facebook.com/rezwanahmodsami)
+- [Twitter](https://twitter.com/rezwanahmodsami)
+- [Linkedin](https://linkedin.com/rezwanahmodsami)
+- [github](https://github.com/rezwanahmodsami)
+- [Instagram](https://instagram.com/rezwanahmodsami)
+
+## Author
+**Name:** Alkhella Inc.\
+[website](https://alkhella.com/)
