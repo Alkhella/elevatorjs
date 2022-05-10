@@ -1,3 +1,3 @@
 
 
-<h1 style="color: green;">This about path id: </h1>
+<h1 style="color: green;">This about path id: <?php echo $_GET["id"]; ?></h1>

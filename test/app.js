@@ -1,5 +1,3 @@
-import {elevator} from '../src/engine.js'
-
 
 let home_btn = document.getElementById("home");
 let about_btn = document.getElementById("about");
@@ -121,6 +119,7 @@ about_btn.addEventListener('click', ()=>{
          content_url: "content/about.php",
          component: "#root",
          preloader: 'loading...',
+         data: {id: 2456},
          error_handler: 'error',
          http_url_change: true,
          http_url: "about.php"

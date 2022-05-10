@@ -4,7 +4,7 @@
    <meta>
       
    </meta>
-   <script type="module" src="app.js"></script>
+   <script src="../src-v2/elevator.pretty.js"></script>
    
 </head>
 <body>
@@ -16,3 +16,4 @@
       <button id="privacy">privacy</button>
       <hr>
    </div>
+   <script src="app.js"></script>
