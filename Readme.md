@@ -166,17 +166,7 @@ elevator.http_routes([
 
 Explanation code about array data objects:
 ``` javascript
-elevator.route({
-            method: GET, // This is method of request, two method is accepted (POST/GET).
-            meta_loader: true, // You need to define boolean(true/false) here to change the meta content on per link visits,
-            content_url: "content/about.php", // there you need to give path of content_url, from where your contet will load in every route.
-            component: "#root", // This is the component address, it will define by class or id in html where content will display.
-            preloader: 'loading...', // This is preloader, there you can insert your preloader html content.
-            data: {id: 2456}, // There you can pass data as javascript object
-            error_handler: '<h2>error<h2>', // There you can put error content in html.
-            http_url_change: true, // there you need to define boolean(true/false) value to declare that http url should change or not in browser.
-            http_url: "about.php" // This is http url, it will visible in browser url tab.
-        })
+
 
 ```
 
@@ -340,6 +330,75 @@ privacy_btn.addEventListener('click', ()=>{
       });
 });
 ```
+
+### Externally header and footer loader:
+
+This  ```elevator.header_load({});``` & ```elevator.footer_load({});``` methods specially use for load header in onclick route to change header and footer.
+By this features you can add multiple header and footer. Specially for mobile based web applications development and dynamic data pass and content load.
+
+See the code example:
+``` javascript
+//header loader method
+elevator.header_load({
+    content_url: "header-content/header_post_page.php",
+    component: "#header_load",
+    preloader: preloader_header,
+    error_handler: 'error',
+    http_url: url
+});
+
+// footer loader method
+elevator.footer_load({
+   content_url: "footer-content/footer_post_page.php",
+   component: "#footer_load",
+   preloader: preloader_footer,
+   error_handler: 'error',
+   http_url: url
+});
+```
+
+Details use example:
+
+``` javascript
+if(bookmarks_btn != undefined){
+
+   bookmarks_btn.addEventListener('click', (route) => {
+         route.preventDefault(); // for stop double click
+         route.stopImmediatePropagation(); // for stop immidiate Propagation.
+         
+         let url  = $(bookmarks_btn).attr("href");
+         elevator.header_load({
+               content_url: "header-content/header_bookmarks.php",
+               component: "#header_load",
+               preloader: preloader_header,
+               error_handler: 'error',
+               http_url: url
+         });
+         elevator.route({
+               method: "GET",
+               meta_loader: true,
+               content_url: "app-content/bookmarks-content.php",
+               component: "#main_body",
+               preloader: '',
+               error_handler: 'error',
+               http_url_change: true,
+               http_url: url
+         });
+
+            elevator.footer_load({
+               content_url: "footer-content/footer_bookmarks.php",
+               component: "#footer_load",
+               preloader: '',
+               error_handler: 'error',
+               http_url: url
+      });
+      
+   });
+}
+```
+
+#### Note:
+If you face double click problem or multiple content load problem, don't forget to use: ```preventDefault()``` & ```stopImmediatePropagation()``` in on click event listener.
 
 ## Last important:
 You must need to call a method ```elevator.__render();``` else content will not load.
