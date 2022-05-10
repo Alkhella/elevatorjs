@@ -1,5 +1,5 @@
 {
-  "name": "elevatorjs",
+  "name": "@alkhella.inc/elevatorjs",
   "version": "1.0.0",
   "description": "This is Elevator js library to develop php single page web applications easily. This library is developed by Rezwan Ahmod Sami.",
   "main": "src/elevator.js",
@@ -16,12 +16,17 @@
   },
   "keywords": [
     "elevatorjs",
-    "elevator.js"
+    "elevator.js",
+    "elevator"
   ],
   "author": "Alkhella Inc",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Alkhella/elevatorjs/issues"
   },
-  "homepage": "https://github.com/Alkhella/elevatorjs#readme"
+  "homepage": "https://github.com/Alkhella/elevatorjs#readme",
+
+  "publishConfig": {
+    "access": "public"
+  }
 }
