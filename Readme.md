@@ -68,7 +68,7 @@ Then link the ```/app.js``` file in footer of  your project html file.
 
 Example Code of ```/index.html``` :
 ```html
-    <script src="app.js"></script>
+    <script src="/app.js"></script>
    </body>
 </html>
 ```
