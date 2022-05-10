@@ -166,7 +166,17 @@ elevator.http_routes([
 
 Explanation code about array data objects:
 ``` javascript
-
+elevator.route({
+            method: GET, // This is method of request, two method is accepted (POST/GET).
+            meta_loader: true, // You need to define boolean(true/false) here to change the meta content on per link visits,
+            content_url: "content/about.php", // there you need to give path of content_url, from where your contet will load in every route.
+            component: "#root", // This is the component address, it will define by class or id in html where content will display.
+            preloader: 'loading...', // This is preloader, there you can insert your preloader html content.
+            data: {id: 2456}, // There you can pass data as javascript object
+            error_handler: '<h2>error<h2>', // There you can put error content in html.
+            http_url_change: true, // there you need to define boolean(true/false) value to declare that http url should change or not in browser.
+            http_url: "about.php" // This is http url, it will visible in browser url tab.
+        })
 
 ```
 
