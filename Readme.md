@@ -10,105 +10,25 @@ For any issue You can directly contact with developer: [Rezwan Ahmod Sami](https
 
 # Introduction
 
-Research projects produce experiments, data, analyses, manuscripts,
-posters, slides, stimuli and materials, computational models, and more.
-However, the potential added value of these products is not fully
-realized due to limited sharing and curating practices. Although more
-transparent communication of these research products has recently been
-encouraged (Houtkoop et al. 2018; Lindsay 2017; Vanpaemel et al. 2015;
-Wicherts et al. 2006; Klein et al. 2018; Martone, Garcia-Castro, and
-VandenBos 2018; Rouder, Haaf, and Snyder 2019; Rouder 2016), these
-efforts often focus narrowly on sharing data (and sometimes analysis
-code). Further, the practical value of sharing is often limited by poor
-documentation, incompatible file formats, and lack of organization,
-resulting in low rates of reproducibility (Hardwicke et al. 2018).
-Standardization of protocols for sharing would be beneficial; but, such
-standards have not yet emerged. Instead of developing another standard,
-we suggest borrowing existing standards and practices from software
-engineering. Specifically, the R package standard, with additional R
-authoring tools, provides a robust framework for organizing and sharing
-reproducible research products.
+Elevator is now mainly developed to use in php projects. In this world lot's of web applications were built in php. Php is good enough, but in the competition of node js, a php developer can't give much user experience. So, that's the reason we developed elevator.js. Elevator js library will make your php web application fully single page application and give your user better experience.
 
-Some advances in data-sharing standards have emerged: In much of
-psychological science it is now customary to share data on Open Science
-Framework (OSF). However, those materials often contain idiosyncratic
-file organization and minimal or missing documentation for raw data. In
-specific areas, organization and documentation standards have emerged,
-(e.g., the BIDS framework in neuroscience, Gorgolewski et al. 2016), but
-they usually only consider data and code instead of the project as a
-whole. More comprehensive proposals are described in the Transparency
-and Openness Promotion (Nosek et al. 2015), and Peer Reviewers’ Openness
-initiative guidelines (Morey et al. 2016), but these fall short of
-describing detailed standards for organization and metadata.
+___
+#### what is single page web application?
+A single-page application is a web application or website that interacts with the user by dynamically rewriting the current web page with new data from the web server, instead of the default method of a web browser loading entire new pages.
+___
 
-We sought for a standard for organizing and sharing that would adhere to
-the FAIR (Findable, Accessible, Interoperable, Reusable) guidelines to
-maximize the reuse potential of data and support “discovery through good
-data management” (Wilkinson et al. 2016). Additionally, we recognized
-the added value of including other research outputs (“products”; e.g.,
-manuscripts) beyond datasets in a reproducible collection of materials
-that is openly available on the internet for transparency and ease of
-access. We identified the R package standard with modern online-based
-workflows as a solution that doesn’t present overwhelming overhead for
-already busy researchers. Here, we present a tutorial on creating R
-packages for sharing research products, such as data, functions, and
-analysis code embedded in narrative documents.
+And also it's easy to use. You can use directly to your php project. To use that script you can directly add our cdn link in your html <head> tag or also you can add by downloading elevator.js. 
+Follow the guideline to use elevator js.
 
-# R Package tutorial
 
-The outline of this tutorial is as follows:
+## Installation guide
 
-1.  Create a new R package with R Studio
-      - Set up the fundamental package infrastructure
-2.  Describe the package
-      - Edit DESCRIPTION and readme files
-3.  Add data to package
-      - Add raw data, preprocessing scripts, and an R data object
-4.  Create and add functions
-      - Create and document functions
-      - Dependencies
-5.  Document the package
-      - Describe the package, its functions, and data, in a machine- and
-        human-readable format
+You can directly install our elevator js by using npm.
 
-After these steps, you will have a functional R package on your
-computer. Then, we will talk about sharing and showcasing your package
-online.
-
-  - Sharing the package
-      - Upload to GitHub to make your package (and its source code)
-        available
-      - Connect to Open Science Framework
-  - Create a website for the package
-      - Showcase your R package online with a website
-  - Add narrative documents
-      - Describe how to use your data and functions (e.g. manuscripts,
-        supplementary analysis files)
-
-## Create a package with R Studio
-
-First, use R Studio to create a new R Project. Click “File” -\> “New
-Project…” -\> “New Directory” -\> “R Package”. This brings up a menu
-where you give your package a name, and specify where to create it on
-your hard drive. To enable Git (Vuorre and Curley 2018), make sure that
-the “Create a git repository” box is checked (see below). In this
-tutorial, we create an R package called exampleRPackage; if you want to
-follow the tutorial exactly, choose that name for your package.
-
-After you click “Create project”, the project’s files and folders look
-like this:
+npm install Example:
 
 ``` bash
-.
-├── .gitignore
-├── .Rbuildignore
-├── DESCRIPTION
-├── NAMESPACE
-├── R
-│   └── hello.R
-├── exampleRPackage.Rproj
-└── man
-    └── hello.Rd
+npm i @alkhella.inc/elevatorjs
 ```
 
 `.gitignore` and `.Rbuildignore` are hidden files, and specify which
@@ -164,7 +84,7 @@ requires. `Imports` is the most common field for listing the R packages
 that your package requires: Packages listed in `Imports` are installed
 when your package is installed. When you write functions (see below) in
 your package, you can use the other package’s functions with the `::`
-operator (e.g. `stringr::to_title_case()`).
+operator (e.g. `stringr::to_title_case()`).
 
 For more information about DESCRIPTION, and describing your package, see
 <http://r-pkgs.had.co.nz/description.html>.
@@ -259,8 +179,8 @@ Each line begins with a `#'` to indicate roxygen2 syntax. First, your
 data set should have a title (`@title`). The `@description` field is an
 optional but highly recommended longer description of the data. For
 example, what were the collection procedures, who were the respondents,
-etc. The `@format` field describes the object (e.g. an R data.frame),
-its dimensions, and then describes all the variables (e.g. `group` and
+etc. The `@format` field describes the object (e.g. an R data.frame),
+its dimensions, and then describes all the variables (e.g. `group` and
 `score`). The `@source` field includes the source of the data, which
 could be a citation to an academic article, or a website, for example.
 Finally, the last line should be the name of the data object in
@@ -278,7 +198,7 @@ immediately. Packages can also depend on other packages (and be depended
 on), such that R automatically installs any requirements for your
 functions to work appropriately. Functions within R packages are
 documented in a standardized manner, and the documentation for a
-function can be viewed in R (e.g. try `?mean`) or online.
+function can be viewed in R (e.g. try `?mean`) or online.
 
 Learning and following R conventions for declaring functions has a
 pedagogical benefit to the researcher and may improve their practices.
