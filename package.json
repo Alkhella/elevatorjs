@@ -1,6 +1,6 @@
 {
   "name": "@alkhella.inc/elevatorjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is Elevator js library to develop php single page web applications easily. This library is developed by Rezwan Ahmod Sami.",
   "main": "src/elevator.js",
   "directories": {
