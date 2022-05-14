@@ -4477,21 +4477,34 @@ class Elevator_engine extends __init {
             let route_path = split_url[last_index];
             let get_route_param = route_path.split("?");
             let route = '';
-            if (route_url == undefined) {
-                route = get_route_param[0];
-            } else {
-                route = route_url;
-            }
+            let query_data = {};
 
-            let method = 'POST';
+            if (route_url == undefined || route_url == "") {
+                let split_current_url = current_http_url.split('/');
+                let cur_route_path = split_current_url[split_current_url.length - 1];
+                let split_param_query = cur_route_path.split("?");
+                route = get_route_param[0];
+                if (split_param_query.length > 1) {
+                    query_data = this.parse_query_string(split_param_query[1]);
+                }
+                query_data.route = route;
+            } else {
+                let split_route_url = route_url.split('/');
+                let r_path_split =split_route_url[split_route_url.length - 1];
+                let r_get_param_query = r_path_split.split("?");
+                if (r_get_param_query.length > 1) {
+                    query_data = this.parse_query_string(r_get_param_query[1]);
+                }
+                route = r_get_param_query[0];
+                query_data.route = route;
+            }
+            let method = 'GET';
             let content_url = this.meta_content_url;
             let component = 'head meta';
             let preloader = '';
             let error_handler = '';
             let type  = 'meta'
-            let data = {
-                route: route
-            };
+            let data = query_data;
 
             this.__init_elevator(method, content_url, component, preloader, error_handler, data, type);
 
@@ -4521,6 +4534,8 @@ class Elevator_engine extends __init {
                     let route_split = content_path.split('?');
                     route.content_url = `${route_split[0]}?` + parse_data;
                 }
+                route.meta_loader = false;
+                // console.log("Header: ", route);
                 this.route(route);
             }
         }
@@ -4546,6 +4561,7 @@ class Elevator_engine extends __init {
                     let route_split = content_path.split('?');
                     route.content_url = `${route_split[0]}?` + parse_data;
                 }
+                route.meta_loader = false;
                 this.route(route);
             }
         }
@@ -4571,6 +4587,7 @@ class Elevator_engine extends __init {
                     let route_split = content_path.split('?');
                     route.content_url = `${route_split[0]}?` + parse_data;
                 }
+                route.meta_loader = false;
                 this.route(route);
             }
         }
@@ -4578,8 +4595,8 @@ class Elevator_engine extends __init {
     }
 
     __render() {
-        this.__render_header();
         this.meta_loader();
+        this.__render_header();
         this.__render_body();
         this.__render_footers();
     }
