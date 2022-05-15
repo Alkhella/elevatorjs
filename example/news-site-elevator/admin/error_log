@@ -1,0 +1,26 @@
+[13-May-2022 06:25:39 Europe/London] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/duckcrow/public_html/admin/config.php on line 4
+[13-May-2022 06:25:43 Europe/London] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/duckcrow/public_html/admin/config.php on line 4
+[13-May-2022 06:27:18 Europe/London] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/duckcrow/public_html/admin/config.php on line 4
+[13-May-2022 06:27:20 Europe/London] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/duckcrow/public_html/admin/config.php on line 4
+[13-May-2022 06:28:00 Europe/London] PHP Notice:  session_start(): A session had already been started - ignoring in /home/duckcrow/public_html/admin/index.php on line 75
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: username in /home/duckcrow/public_html/admin/header.php on line 55
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: user_role in /home/duckcrow/public_html/admin/header.php on line 72
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: user_role in /home/duckcrow/public_html/admin/post.php on line 23
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: user_role in /home/duckcrow/public_html/admin/post.php on line 30
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: title in /home/duckcrow/public_html/admin/post.php on line 59
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: category_name in /home/duckcrow/public_html/admin/post.php on line 60
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: post_date in /home/duckcrow/public_html/admin/post.php on line 61
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: username in /home/duckcrow/public_html/admin/post.php on line 62
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: post_id in /home/duckcrow/public_html/admin/post.php on line 63
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: post_id in /home/duckcrow/public_html/admin/post.php on line 64
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: category in /home/duckcrow/public_html/admin/post.php on line 64
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: user_role in /home/duckcrow/public_html/admin/post.php on line 76
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined index: user_role in /home/duckcrow/public_html/admin/post.php on line 79
+[13-May-2022 06:28:01 Europe/London] PHP Notice:  Undefined variable: sql1 in /home/duckcrow/public_html/admin/post.php on line 84
+[13-May-2022 06:28:01 Europe/London] PHP Warning:  mysqli_query(): Empty query in /home/duckcrow/public_html/admin/post.php on line 84
+[13-May-2022 06:28:25 Europe/London] PHP Notice:  session_start(): A session had already been started - ignoring in /home/duckcrow/public_html/admin/index.php on line 75
+[13-May-2022 06:37:44 Europe/London] PHP Notice:  Only variables should be passed by reference in /home/duckcrow/public_html/admin/save-post.php on line 10
+[13-May-2022 06:38:29 Europe/London] PHP Notice:  Only variables should be passed by reference in /home/duckcrow/public_html/admin/save-post.php on line 10
+[13-May-2022 06:39:10 Europe/London] PHP Notice:  Undefined variable: _SESSION in /home/duckcrow/public_html/admin/delete-message.php on line 3
+[13-May-2022 06:39:10 Europe/London] PHP Notice:  Trying to access array offset on value of type null in /home/duckcrow/public_html/admin/delete-message.php on line 3
+[13-May-2022 06:43:18 Europe/London] PHP Notice:  Only variables should be passed by reference in /home/duckcrow/public_html/admin/save-post.php on line 10
