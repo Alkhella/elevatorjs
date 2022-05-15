@@ -1,6 +1,6 @@
 <?php
-   if (isset($_POST['route'])) {
-      switch ($_POST['route']) {
+   if (isset($_GET['route'])) {
+      switch ($_GET['route']) {
          case 'index.php':
             $title = 'Home';
             break;
