@@ -124,6 +124,108 @@ Example:
 elevator.meta_content_url = 'inc/meta-content.php';
 ```
 
+After set meta content path, you need to add ```<meta></meta>``` tag on ```<head>``` tag.
+##### Example:
+```html
+<head>
+    <meta></meta>
+</head>
+```
+**Note:** After adding this, it will will load meta content, but you will face a problem to do seo with meta content. I mean google or other's urls crawlers can't get your seo info from meta content because of meta content and other's content loading after document ready. So to fix that problem you also need to add some meta info by php.
+
+##### Example: (in ```header.php``` file)
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta>
+      <?php
+         $route = basename($_SERVER['PHP_SELF']);
+         switch ($route) {
+            case 'index.php':
+               $title = 'Home';
+               break;
+            case 'about.php':
+                  $title = 'About';
+               break;
+            case 'privacy.php':
+               $title = 'Privacy';
+               break;
+            default:
+            $title = 'Home';
+            break;
+         }
+      
+   ?>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><?php echo $title; ?></title>
+   </meta>
+   <script src="https://cdn.alkhella.com/elevatorjs/src/elevator.js"></script>
+   
+</head>
+<body>
+```
+
+##### And In ```meta-content.php``` file:
+``` php
+<?php
+   if (isset($_GET['route'])) {
+      switch ($_GET['route']) {
+         case 'index.php':
+            $title = 'Home';
+            break;
+         case 'about.php':
+               $title = 'About';
+            break;
+         case 'privacy.php':
+            $title = 'Privacy';
+            break;
+         default:
+         $title = 'Home';
+         break;
+      }
+   }
+?>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><?php echo $title; ?></title>
+```
+
+**Note:** In ```meta-content.php``` you can get any parameter from get request automaticly. 
+**Example:** Suppose your url is ```https://example.com/category.php?catid=234&deviceid=45678&location=Bangladesh```
+So, if you passed any parameter by url, you can get this parameter with extra parameter name is: ```route```.
+
+##### Example: (how to get parameter's is ```meta-content.php``` file)
+```php
+// this is meta-content.php file
+// you can get here by default route param
+// example:
+$route = $_GET["route"]; // this is default param and you can't remove this
+
+// user defined param
+// from: category.php?catid=234&deviceid=45678&location=Bangladesh
+// example:
+$catid = $_GET["catid"];
+$deviceid = $_GET["deviceid"];
+$location = $_GET["location"];
+
+echo "Route: "$route."<br>";
+echo "catid: "$catid."<br>";
+echo "deviceid: "$deviceid."<br>";
+echo "location: "$location."<br>";
+
+// Output:
+// Route: category.php
+// catid: 234
+// deviceid: 45678
+// location: Bangladesh
+```
+
+That's everything you need to do for SEO.
+___
+### http routes
+
 Then you must need to set ```http routes```. ```Http Routes``` is actually the urls, which urls user will visit. 
 You need to pass array objects with all the routes.
 
@@ -167,7 +269,7 @@ elevator.http_routes([
 Explanation code about array data objects:
 ``` javascript
 elevator.route({
-            method: GET, // This is method of request, two method is accepted (POST/GET).
+            method: 'GET', // This is method of request, two method is accepted (POST/GET).
             meta_loader: true, // You need to define boolean(true/false) here to change the meta content on per link visits,
             content_url: "content/about.php", // there you need to give path of content_url, from where your contet will load in every route.
             component: "#root", // This is the component address, it will define by class or id in html where content will display.
@@ -177,7 +279,6 @@ elevator.route({
             http_url_change: true, // there you need to define boolean(true/false) value to declare that http url should change or not in browser.
             http_url: "about.php" // This is http url, it will visible in browser url tab.
         })
-
 ```
 
 in ```elevator.route()``` method
