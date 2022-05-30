@@ -10993,8 +10993,24 @@ class __init {
             if (!isValidServerHost) {
                 alert("The server host is invalid");
             }else{
+                
                 if ((server_host.indexOf("https://www.") !== -1) || (server_host.indexOf("http://www.") !== -1)) {
-                    server_host = server_host;
+                    let current_url = window.location.href;
+                    let split_url = current_url.split("/");
+                    let new_url = "";
+                    for(let i = 0; i < 3; i++){
+                        if(i == 1){
+                            new_url += "//";
+                        }else{
+                            new_url += split_url[i];
+                        }
+                    }
+                    // console.log(server_host);
+                    new_url += "/";
+                    if(http_url == server_host){
+                        http_url = new_url;
+                    }
+                    server_host = new_url;
                 }else if((server_host.indexOf("http://127.0.0.1") !== -1) || (server_host.indexOf("http://localhost") !== -1)){
                     let cur_url = window.location.href;
                     if (cur_url.indexOf("http://127.0.0.1") !== -1) {
@@ -11030,6 +11046,7 @@ class __init {
         if (http_url_change != false) {
             if (http_url != undefined) {
                 if (type == 'route') {
+                    
                     window.history.pushState(server_host, '', http_url);
                 }
             }
