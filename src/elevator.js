@@ -11024,21 +11024,27 @@ class __init {
                     }
                 }else{
                     let split_server_host = server_host.split("/");
+                    let new_host = "";
                     for (let x = 0; x < split_server_host.length; x++) {
                         if ((x == 0) && (split_server_host[x] == "https:") || (split_server_host[x] == "http:")) {
-                            server_host = split_server_host[x]+"//";
+                            new_host = split_server_host[x]+"//";
                             continue;
                         }
                         if (x == 1) {
-                            server_host += "www.";
+                            new_host += "www.";
                             continue;
                         }
                         if (split_server_host[x] == "") {
-                            server_host += "/";
+                            new_host += "/";
                             continue;
                         }
-                        server_host += split_server_host[x];
+                        new_host += split_server_host[x];
                     }
+                    
+                    if(http_url == server_host){
+                        http_url = new_host;
+                    }
+                    server_host = new_host;
                 }
             }
         }
