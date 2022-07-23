@@ -11005,7 +11005,7 @@ class __init {
                             new_url += split_url[i];
                         }
                     }
-                    // console.log(server_host);
+                  
                     new_url += "/";
                     if(http_url == server_host){
                         http_url = new_url;
@@ -11023,14 +11023,15 @@ class __init {
                         }
                     }
                 }else{
+                    let current_url = window.location.href;
                     let split_server_host = server_host.split("/");
                     let new_host = "";
                     for (let x = 0; x < split_server_host.length; x++) {
                         if ((x == 0) && (split_server_host[x] == "https:") || (split_server_host[x] == "http:")) {
-                            new_host = split_server_host[x]+"//";
+                            new_host = split_server_host[x]+"/";
                             continue;
                         }
-                        if (x == 1) {
+                        if (x == 1 && ((current_url.indexOf("https://www.") !== -1) || (server_host.indexOf("http://www.") !== -1))) {
                             new_host += "www.";
                             continue;
                         }
